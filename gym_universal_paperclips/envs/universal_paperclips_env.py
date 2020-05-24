@@ -34,7 +34,7 @@ class UniversalPaperclipsEnv(gym.Env):
     self.wireCostSpan = self.driver.find_element_by_id('wireCost')
 
     self.action_space = spaces.Discrete(5)
-    self.observation_space = spaces.Box(low=0.0, high=float('inf'), shape=10, dtype=float)
+    self.observation_space = spaces.Box(low=0.0, high=float('inf'), shape=(10,), dtype=float)
 
   def step(self, action):
         """
@@ -87,7 +87,7 @@ class UniversalPaperclipsEnv(gym.Env):
 
   # helpers
   def numFromSpan(self, element):
-    return float(element.text)
+    return float(element.text.replace(',',''))
 
   def enabledButtons(self):
     return [button for button in self.allButtons if button.is_enabled()]
